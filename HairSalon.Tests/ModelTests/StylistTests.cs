@@ -33,5 +33,20 @@ namespace HairSalon.Tests
         Assert.AreEqual(name, actualResult);
     }
 
+    [TestMethod]
+    public void GetAll_ReturnsAllStylistObjects_StylistList()
+    {
+        string name01 = "John";
+        string name02 = "Maria";
+        Stylist newStylist1 = new Stylist(name01);
+        newStylist1.Save();
+        Stylist newStylist2 = new Stylist(name02);
+        newStylist2.Save();
+        List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+
+        List<Stylist> actualResult = Stylist.GetAll();
+        CollectionAssert.AreEqual(newList, actualResult);
+    }
+
   }
 }
