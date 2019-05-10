@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
 {
-  public class Category
+  public class Stylist
   {
 
   }
