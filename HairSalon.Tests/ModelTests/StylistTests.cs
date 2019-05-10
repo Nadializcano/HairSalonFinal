@@ -6,8 +6,14 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class StylistTest
+  public class StylistTest : IDisposable
   {
+
+    public void Dispose()
+    {
+      Stylist.ClearAll();
+    }
+
 
 
     [TestMethod]
@@ -26,5 +32,6 @@ namespace HairSalon.Tests
         string actualResult = newStylist.GetName();
         Assert.AreEqual(name, actualResult);
     }
+
   }
 }
