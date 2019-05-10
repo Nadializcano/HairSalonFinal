@@ -17,5 +17,14 @@ namespace HairSalon.Tests
         Stylist newStylist = new Stylist(name);
         Assert.AreEqual(typeof(Stylist), newStylist.GetType());
     }
+
+    [TestMethod]
+    public void GetName_ReturnsName_String()
+    {
+        string name = "Test Stylist";
+        Stylist newStylist = new Stylist(name);
+        string actualResult = newStylist.GetName();
+        Assert.AreEqual(name, actualResult);
+    }
   }
 }
