@@ -20,7 +20,6 @@ namespace HairSalon.Tests
     }
 
 
-
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
@@ -39,19 +38,37 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetAll_ReturnsAllStylistObjects_StylistList()
-    {
-        string name01 = "John";
-        string name02 = "Maria";
-        Stylist newStylist1 = new Stylist(name01);
-        newStylist1.Save();
-        Stylist newStylist2 = new Stylist(name02);
-        newStylist2.Save();
-        List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+  public void GetAll_ReturnsEmptyListFromDatabase_StylistList()
+  {
+    List<Stylist> newList = new List<Stylist> { };
+    List<Stylist> result = Stylist.GetAll();
+    CollectionAssert.AreEqual(newList, result);
+  }
 
-        List<Stylist> actualResult = Stylist.GetAll();
-        CollectionAssert.AreEqual(newList, actualResult);
-    }
+
+    // [TestMethod]
+    // public void GetId_ReturnsStylistId_Int()
+    // {
+    //     string name = "Test Stylist";
+    //     Stylist newStylist = new Stylist(name);
+    //     int actualResult = newStylist.GetId();
+    //     Assert.AreEqual(1, actualResult);
+    // }
+
+    // [TestMethod]
+    // public void GetAll_ReturnsAllStylistObjects_StylistList()
+    // {
+    //     string name01 = "Jon";
+    //     string name02 = "Maria";
+    //     Stylist newStylist1 = new Stylist(name01);
+    //     newStylist1.Save();
+    //     Stylist newStylist2 = new Stylist(name02);
+    //     newStylist2.Save();
+    //     List<Stylist> newList = new List<Stylist> { newStylist1, newStylist2 };
+    //
+    //     List<Stylist> actualResult = Stylist.GetAll();
+    //     CollectionAssert.AreEqual(newList, actualResult);
+    //}
 
   }
 }
