@@ -45,6 +45,17 @@ namespace HairSalon.Tests
     CollectionAssert.AreEqual(newList, result);
   }
 
+  [TestMethod]
+    public void Equals_ReturnsTrueIfNamesAreTheSame_Stylist()
+    {
+      //Arrange, Act
+      Stylist firstStylist = new Stylist("Maria");
+      Stylist secondStylist = new Stylist("Maria");
+    
+      //Assert
+      Assert.AreEqual(firstStylist, secondStylist);
+    }
+
 
     // [TestMethod]
     // public void GetId_ReturnsStylistId_Int()
@@ -69,6 +80,23 @@ namespace HairSalon.Tests
     //     List<Stylist> actualResult = Stylist.GetAll();
     //     CollectionAssert.AreEqual(newList, actualResult);
     //}
+
+
+    // [TestMethod]
+    // public void Find_ReturnsStylistInDatabase_Stylist()
+    // {
+    //   //Arrange
+    //   Stylist testStylist = new Stylist("Maria");
+    //   testStylist.Save();
+    //
+    //   //Act
+    //   Stylist foundStylist = Stylist.Find(testStylist.GetId());
+    //
+    //   //Assert
+    //   Assert.AreEqual(testStylist, foundStylist);
+    // }
+
+
 
   }
 }
