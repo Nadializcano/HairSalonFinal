@@ -23,6 +23,12 @@ namespace HairSalon.Models
     {
       return _id;
     }
+
+    public override int GetHashCode()
+        {
+            return this.GetId().GetHashCode();
+        }
+
     public static void ClearAll()
       {
         MySqlConnection conn = DB.Connection();
@@ -121,6 +127,20 @@ namespace HairSalon.Models
         }
         return newStylist;
       }
+
+      public static void DeleteAll()
+        {
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"DELETE FROM stylist;";
+          cmd.ExecuteNonQuery();
+          conn.Close();
+          if (conn != null)
+          {
+              conn.Dispose();
+          }
+        }
 
   }
 }
