@@ -6,8 +6,13 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class ClientTest
+  public class ClientTest : IDisposable
   {
+    public void Dispose()
+    {
+      Client.ClearAll();
+    }
+
   public ClientTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=Nadia_lizcano_test;";
@@ -39,6 +44,14 @@ namespace HairSalon.Tests
       string result = newClient.GetName();
 
       Assert.AreEqual(updatedName, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsEmptyListFromDatabase_ClientList()
+    {
+      List<Client> newList = new List<Client> { };
+      List<Client> result = Client.GetAll();
+      CollectionAssert.AreEqual(newList, result);
     }
   }
 }
