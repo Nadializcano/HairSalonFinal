@@ -61,8 +61,8 @@ namespace HairSalon.Tests
       string name01 = "Maria";
       string name02 = "Noah";
       Client newClient1 = new Client(name01, 1);
-      Client newClient2 = new Client(name02, 1);
       newClient1.Save();
+      Client newClient2 = new Client(name02, 1);
       newClient2.Save();
 
       List<Client> newList = new List<Client> { newClient1, newClient2 };
@@ -86,7 +86,7 @@ namespace HairSalon.Tests
     // public void Save_SavesToDatabase_ClientList()
     // {
     //   //Arrange
-    //   Client testClient = new Client("Noah, 1");
+    //   Client testClient = new Client("Noah", 1);
     //
     //   //Act
     //   testClient.Save();
@@ -150,19 +150,19 @@ namespace HairSalon.Tests
       Assert.AreEqual(secondName, result);
     }
 
-    // [TestMethod]
-    // public void GetStylistId_ReturnsClientsParentStylistId_Int()
-    // {
-    //   //Arrange
-    //   Stylist newStylist = new Stylist("Noah");
-    //   Client newClient = new Client("Maria.", 1, newStylist.GetId());
-    //
-    //   //Act
-    //   int result = newClient.GetStylistId();
-    //
-    //   //Assert
-    //   Assert.AreEqual(newStylist.GetId(), result);
-    // }
+    [TestMethod]
+    public void GetStylistId_ReturnsClientsParentStylistId_Int()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Noah", 1);
+      Client newClient = new Client("Maria.", 1, newStylist.GetId());
+
+      //Act
+      int result = newClient.GetStylistId();
+
+      //Assert
+      Assert.AreEqual(newStylist.GetId(), result);
+    }
 
     // [TestMethod]
     // public void Delete_DeleteClientInDatabase_Client()
