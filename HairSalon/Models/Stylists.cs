@@ -43,7 +43,6 @@ namespace HairSalon.Models
         }
       }
 
-
         public static List<Stylist> GetAll()
     {
       List<Stylist> allStylists = new List<Stylist> {};
@@ -126,6 +125,34 @@ namespace HairSalon.Models
           conn.Dispose();
         }
         return newStylist;
+      }
+
+      public List<Client> GetClients()
+       {
+        List<Client> allCategoryClients = new List<Client> {};
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+        MySqlParameter stylistId = new MySqlParameter();
+        categoryId.ParameterName = "@stylist_id";
+        categoryId.Value = this._id;
+        cmd.Parameters.Add(stylistId);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        while(rdr.Read())
+        {
+          int clientId = rdr.GetInt32(0);
+          string clientName = rdr.GetString(1);
+          int clientStylistId = rdr.GetInt32(2);
+          Client newClient = new Client(clientName, clientStylistId, clientId);
+          allStylistClients.Add(newClient);
+        }
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return allStylistClients;
       }
 
       public static void DeleteAll()
