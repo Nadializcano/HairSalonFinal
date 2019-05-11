@@ -11,7 +11,7 @@ namespace HairSalon.Tests
 
     public void Dispose()
     {
-      Client.ClearAll();
+      // Client.ClearAll();
       Stylist.ClearAll();
     }
 
@@ -128,22 +128,22 @@ namespace HairSalon.Tests
       Assert.AreEqual(testStylist, foundStylist);
     }
 
-    [TestMethod]
-  public void GetClients_RetrievesAllClientsWithCategory_ClientList()
-  {
-    //Arrange, Act
-    Category testCategory = new Category("Maria");
-    testCategory.Save();
-    Client firstClient = new Client("Noah", testCategory.GetId());
-    firstClient.Save();
-    Client secondClient = new Client("Sandra", testCategory.GetId());
-    secondClient.Save();
-    List<Client> testClientList = new List<Client> {firstClient, secondClient};
-    List<Client> resultClientList = testCategory.GetClients();
-
-    //Assert
-    CollectionAssert.AreEqual(testClientList, resultClientList);
-  }
+  //   [TestMethod]
+  // public void GetClients_RetrievesAllClientsWithStylist_ClientList()
+  // {
+  //   //Arrange, Act
+  //   Stylist testStylist = new Stylist("Maria");
+  //   testStylist.Save();
+  //   Client firstClient = new Client("Noah", testStylist.GetId());
+  //   firstClient.Save();
+  //   Client secondClient = new Client("Sandra", testStylist.GetId());
+  //   secondClient.Save();
+  //   List<Client> testClientList = new List<Client> {firstClient, secondClient};
+  //   List<Client> resultClientList = testStylist.GetClients();
+  //
+  //   //Assert
+  //   CollectionAssert.AreEqual(testClientList, resultClientList);
+  // }
 
 
   }
