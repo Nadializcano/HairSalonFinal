@@ -53,5 +53,133 @@ namespace HairSalon.Tests
       List<Client> result = Client.GetAll();
       CollectionAssert.AreEqual(newList, result);
     }
+
+    [TestMethod]
+    public void GetAll_ReturnsClients_ClientList()
+    {
+      //Arrange
+      string name01 = "Maria";
+      string name02 = "Noah";
+      Client newClient1 = new Client(name01, 1);
+      Client newClient2 = new Client(name02, 1);
+      newClient1.Save();
+      newClient2.Save();
+
+      List<Client> newList = new List<Client> { newClient1, newClient2 };
+
+      //Act
+      List<Client> result = Client.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
+    {
+      Client firstClient = new Client("Maria", 1);
+      Client secondClient = new Client("Maria", 1);
+      Assert.AreEqual(firstClient, secondClient);
+    }
+
+    // [TestMethod]
+    // public void Save_SavesToDatabase_ClientList()
+    // {
+    //   //Arrange
+    //   Client testClient = new Client("Noah, 1");
+    //
+    //   //Act
+    //   testClient.Save();
+    //   List<Client> result = Client.GetAll();
+    //   List<Client> testList = new List<Client>{testClient};
+    //
+    //   //Assert
+    //   CollectionAssert.AreEqual(testList, result);
+    // }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      Client testClient = new Client("Noah", 1);
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
+      int result = savedClient.GetId();
+      int testId = testClient.GetId();
+      Assert.AreEqual(testId, result);
+    }
+
+    // [TestMethod]
+    // public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
+    // {
+    //     //Arrange
+    //     string name = "Noah";
+    //     Client newClient = new Client(name);
+    //
+    //     //Act
+    //     int result = newClient.GetId();
+    //
+    //     //Assert
+    //     Assert.AreEqual(1, result);
+    // }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectClientFromDatabase_Client()
+    {
+      //Arrange
+      Client testClient = new Client("Noah", 1);
+      testClient.Save();
+
+      //Act
+      Client foundClient = Client.Find(testClient.GetId());
+
+      //Assert
+      Assert.AreEqual(testClient, foundClient);
+    }
+
+    [TestMethod]
+    public void Edit_UpdatesClientInDatabase_String()
+    {
+      string firstName = "Noah";
+      Client testClient = new Client(firstName, 1);
+      testClient.Save();
+      string secondName = "Pris";
+
+      testClient.Edit(secondName);
+      string result = Client.Find(testClient.GetId()).GetName();
+
+      Assert.AreEqual(secondName, result);
+    }
+
+    // [TestMethod]
+    // public void GetStylistId_ReturnsClientsParentStylistId_Int()
+    // {
+    //   //Arrange
+    //   Stylist newStylist = new Stylist("Noah");
+    //   Client newClient = new Client("Maria.", 1, newStylist.GetId());
+    //
+    //   //Act
+    //   int result = newClient.GetStylistId();
+    //
+    //   //Assert
+    //   Assert.AreEqual(newStylist.GetId(), result);
+    // }
+
+    // [TestMethod]
+    // public void Delete_DeleteClientInDatabase_Client()
+    // {
+    //   string firstName = "Noah";
+    //   Client testClient = new Client(firstName, 1);
+    //   testClient.Save();
+    //
+    //
+    //   testClient.Delete(1);
+    //
+    //   string result = Client.Delete(testClient.GetId());
+    //
+    //   Assert.AreEqual(testClient.Delete(1), result);
+    // }
+
+
+
   }
 }
