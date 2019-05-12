@@ -1,0 +1,22 @@
+@using HairSalon.Models;
+
+<h1>Hair Salon</h1>
+<ul>
+
+@if (Model.Count == 0)
+{
+  <p>You have no clients in your list!</p>
+}
+@if (Model.Count !=0)
+{
+  @foreach (Client client in Model)
+  {
+  <li><a href='/clients/@client.GetId()'>@client.GetName()</a></li>
+  }
+}
+
+</ul>
+<a href="/clients/new">Add a new client.</a>
+<form action="/clients/delete" method="post">
+  <button type="submit" name="button">Clear All Clients</button>
+</form>
