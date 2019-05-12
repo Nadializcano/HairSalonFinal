@@ -1,12 +1,31 @@
-<h1>Hair Salon</h1>
-<hr>
+<html>
+  <head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
+  </head>
+    <body>
 
-<h2>Edit client: @Model["client"].GetName()</h2>
+    <div class="container">
+  	<div class="row">
 
-<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
-  <label for="newName">Name:</label>
-  <input type="text" name="newName" value="@Model["client"].GetName()">
-  <button type="submit">Edit</button>
-</form>
 
-<h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous page</a></h4>
+      <h1> NL Hair Salon</h1>
+
+
+      <h2>Edit client: @Model["client"].GetName()</h2>
+
+      <form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
+        <label for="newName">Name:</label>
+        <input type="text" name="newName" value="@Model["client"].GetName()">
+        <button type="submit">Edit</button>
+      </form>
+
+      <h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous page</a></h4>
+
+    </div>
+    </div>
+
+    </body>
+  </html>

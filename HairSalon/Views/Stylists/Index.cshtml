@@ -1,25 +1,48 @@
 @using HairSalon.Models;
 
-<h1>HairSalon</h1>
-<ul>
+<html>
+  <head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
+  </head>
+    <body>
 
-@if (Model.Count == 0)
-{
-  <p>No stylists have been added yet</p>
-}
-@if(Model.Count != 0)
-{
-  @foreach (Stylist stylist in Model)
-  {
-    <li><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></li>
+    <div class="container">
+  	<div class="row">
+      <h1>NL Hair Salon</h1>
+      <ul>
 
-    <button class="btn btn-sm" ><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
-  }
-}
+      @if (Model.Count == 0)
+      {
+        <p>No stylists have been added yet</p>
+      }
+      @if(Model.Count != 0)
+      {
+        @foreach (Stylist stylist in Model)
+        {
+          <li><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></li>
 
-</ul>
-<p><a href='/'>Back home</a></p>
-<p><a href="/stylists/new">Add a new stylist.</a></p>
-<form action="/stylists/delete" method="post">
-  <button type="submit" name="button">Delete all stylists</button>
-</form>
+          <button class="btn btn-sm" ><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
+
+        }
+
+      }
+
+      </ul>
+
+      <form action="/stylists/delete" method="post">
+      <button class="btn btn-sm" type="submit" name="button">Delete all stylists</button>
+      </form>
+      <p><a href="/stylists/new">Add a new stylist.</a></p>
+      <p><a href='/'>Back home</a></p>
+
+
+
+    </div>
+    </div>
+
+    </body>
+
+</html>

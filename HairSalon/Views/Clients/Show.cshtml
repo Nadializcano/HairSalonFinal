@@ -1,9 +1,27 @@
-<h1>Hair Salon Client Details: </h1>
+<html>
+  <head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
+  </head>
+    <body>
 
-<h2>@Model["client"].GetName()</h2>
-<h2>Stylist: @Model["stylist"].GetName()</h2>
+    <div class="container">
+  	<div class="row">
 
-<a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>
-<a href='/stylists'>View all stylists</a>
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this Client</a>
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete'>Delete this Client</a>
+      <h1>NL Hair Salon Client Details: </h1>
+
+      <h2>@Model["client"].GetName()</h2>
+      <h2>Stylist: @Model["stylist"].GetName()</h2>
+
+      <a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>
+      <a href='/stylists'>View all stylists</a>
+      <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this Client</a>
+      <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete'>Delete this Client</a>
+
+    </div>
+    </div>
+
+    </body>
+  </html>

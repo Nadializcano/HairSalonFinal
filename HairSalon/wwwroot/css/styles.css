@@ -1,0 +1,29 @@
+body {
+  background-color: #D2C8C8;
+}
+
+h1 {
+  font-family: Helvetica;
+  color: #434242;
+}
+
+h2 {
+  font-family: Helvetica;
+  color: #434242;
+}
+
+h3 {
+  font-family: Helvetica;
+  color: #434242;
+}
+
+p {
+  font-family: Helvetica;
+  color: #5A5454;
+}
+
+a {
+    color: #352F2F;
+    text-decoration: none;
+    font-size: 21.6px;
+}
