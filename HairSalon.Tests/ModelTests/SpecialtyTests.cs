@@ -19,5 +19,29 @@ namespace HairSalon.Tests
       Specialty newSpecialty = new Specialty("Test");
       Assert.AreEqual(typeof(Specialty), newSpecialty.GetType());
     }
+
+    [TestMethod]
+    public void GetDescription_ReturnsDescription_String()
+    {
+      string description = "makeuo";
+      Specialty newSpecialty = new Specialty(description);
+
+      string result = newSpecialty.GetDescription();
+
+      Assert.AreEqual(description, result);
+    }
+
+   [TestMethod]
+   public void SetDescription_SetDescription_String()
+   {
+     string description = "makeup";
+     Specialty newSpecialty = new Specialty(description);
+
+     string updatedDescription = "haircut";
+     newSpecialty.SetDescription(updatedDescription);
+     string result = newSpecialty.GetDescription();
+
+     Assert.AreEqual(updatedDescription, result);
+   }
   }
 }
