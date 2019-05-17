@@ -11,8 +11,8 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists")]
     public ActionResult Index()
     {
-        List<Stylist> allStylists = Stylist.GetAll();
-        return View(allStylists);
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View(allStylists);
     }
 
     [HttpPost("/stylists")]
@@ -23,10 +23,11 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View("Index", allStylists);
     }
+
     [HttpGet("/stylists/new")]
     public ActionResult New()
     {
-        return View();
+      return View();
     }
     // This one creates new Clients within a given Stylist, not new Stylists:
     [HttpPost("/stylists/{stylistId}/clients")]
@@ -46,37 +47,39 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
     {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-        Stylist selectedStylist = Stylist.Find(id);
-        List<Client> stylistClients = selectedStylist.GetClients();
-        //Client item = Client.Find(itemId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist selectedStylist = Stylist.Find(id);
+      List<Client> stylistClients = selectedStylist.GetClients();
+      //Client item = Client.Find(itemId);
 
-        model.Add("stylist", selectedStylist);
-        model.Add("clients", stylistClients);
-        return View(model);
+      model.Add("stylist", selectedStylist);
+      model.Add("clients", stylistClients);
+      return View(model);
     }
+
     [HttpPost("/stylists/delete")]
     public ActionResult Delete()
     {
-        Stylist.ClearAll();
-        Client.ClearAll();
-        return View();
+      Stylist.ClearAll();
+      Client.ClearAll();
+      return View();
     }
 
     [HttpGet("/stylists/{stylistId}/edit")]
-      public ActionResult Edit(int stylistId)
-      {
-        Stylist stylist = Stylist.Find(stylistId);
-        return View(stylist);
-      }
+    public ActionResult Edit(int stylistId)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      return View(stylist);
+    }
+
     [HttpPost("/stylists/{stylistId}/update")]
-      public ActionResult Update(int stylistId, string newName)
-      {
-        Stylist stylist = Stylist.Find(stylistId);
-        stylist.Edit(newName);
-        List<Stylist> allStylists = Stylist.GetAll();
-        return View("Index", allStylists);
-      }
+    public ActionResult Update(int stylistId, string newName)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      stylist.Edit(newName);
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View("Index", allStylists);
+    }
 
     [ActionName("Destroy"), HttpPost("/stylists/{id}/delete")]
     public ActionResult Destroy(int id)
@@ -91,5 +94,5 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index");
     }
 
-}
+  }
 }
