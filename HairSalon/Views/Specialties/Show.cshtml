@@ -1,0 +1,20 @@
+@using HairSalon.Models;
+
+<h1>NL Hair Salon</h1>
+<h2>Specialty: @Model["selectedSpecialty"].GetDescription()</h2>
+<hr />
+
+@if (@Model["specialtyStylists"].Count != 0)
+{
+  <h4>This specialty has these stylists:</h4>
+  <ul>
+    @foreach (Stylist stylist in @Model["specialtyStylists"])
+    {
+      <li>@stylist.GetName()</li>
+    }
+  </ul>
+}
+
+
+
+<p><a href="/">Return to Main Page</a></p>
