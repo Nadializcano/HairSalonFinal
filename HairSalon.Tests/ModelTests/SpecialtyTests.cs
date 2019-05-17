@@ -34,14 +34,25 @@ namespace HairSalon.Tests
    [TestMethod]
    public void SetDescription_SetDescription_String()
    {
-     string description = "makeup";
-     Specialty newSpecialty = new Specialty(description);
+      string description = "makeup";
+      Specialty newSpecialty = new Specialty(description);
 
-     string updatedDescription = "haircut";
-     newSpecialty.SetDescription(updatedDescription);
-     string result = newSpecialty.GetDescription();
+      string updatedDescription = "haircut";
+      newSpecialty.SetDescription(updatedDescription);
+      string result = newSpecialty.GetDescription();
 
-     Assert.AreEqual(updatedDescription, result);
+      Assert.AreEqual(updatedDescription, result);
    }
+
+   [TestMethod]
+    public void GetAll_ReturnsEmptyListFromDatabase_SpecialtyList()
+    {
+      List<Specialty> newList = new List<Specialty> { };
+
+      List<Specialty> result = Specialty.GetAll();
+
+      CollectionAssert.AreEqual(newList, result);
+    }
+
   }
 }
