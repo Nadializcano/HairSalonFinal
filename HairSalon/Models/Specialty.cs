@@ -52,5 +52,80 @@ namespace HairSalon.Models
         }
         return allSpecialtys;
       }
+
+      public static void ClearAll()
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"DELETE FROM specialties;";
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+      }
+
+      public static Specialty Find(int id)
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM specialties WHERE id = (@searchId);";
+        MySqlParameter searchId = new MySqlParameter();
+        searchId.ParameterName = "@searchId";
+        searchId.Value = id;
+        cmd.Parameters.Add(searchId);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        int specialtyId = 0;
+        string specialtyName = "";
+        while(rdr.Read())
+        {
+          specialtyId = rdr.GetInt32(0);
+          specialtyName = rdr.GetString(1);
+        }
+        Specialty newSpecialty = new Specialty(specialtyName, specialtyId);
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return newSpecialty;
+      }
+
+      public override bool Equals(System.Object otherSpecialty)
+      {
+        if (!(otherSpecialty is Specialty))
+        {
+          return false;
+        }
+        else
+        {
+          Specialty newSpecialty = (Specialty) otherSpecialty;
+          bool idEquality = this.GetId() == newSpecialty.GetId();
+          bool descriptionEquality = this.GetDescription() == newSpecialty.GetDescription();
+          return (idEquality && descriptionEquality);
+        }
+      }
+
+      public void Save()
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO specialties (description) VALUES (@description);";
+        MySqlParameter description = new MySqlParameter();
+        description.ParameterName = "@description";
+        description.Value = this._description;
+        cmd.Parameters.Add(description);
+        cmd.ExecuteNonQuery();
+        _id = (int) cmd.LastInsertedId;
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+      }
   }
 }

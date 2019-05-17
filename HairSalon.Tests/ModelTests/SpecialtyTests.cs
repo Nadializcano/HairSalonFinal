@@ -6,8 +6,13 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class SpecialtyTest
+  public class SpecialtyTest : IDisposable
   {
+    public void Dispose()
+    {
+      Specialty.ClearAll();
+    }
+
     public SpecialtyTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=Nadia_lizcano_test;";
@@ -52,6 +57,56 @@ namespace HairSalon.Tests
       List<Specialty> result = Specialty.GetAll();
 
       CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsSpecialtys_SpecialtyList()
+    {
+      string description01 = "makeuo";
+      string description02 = "haircut";
+      Specialty newSpecialty1 = new Specialty(description01);
+      newSpecialty1.Save();
+      Specialty newSpecialty2 = new Specialty(description02);
+      newSpecialty2.Save();
+      List<Specialty> newList = new List<Specialty> { newSpecialty1, newSpecialty2 };
+
+      List<Specialty> result = Specialty.GetAll();
+
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectSpecialtyFromDatabase_Specialty()
+    {
+      Specialty testSpecialty = new Specialty("Makeup");
+      testSpecialty.Save();
+
+      Specialty foundSpecialty = Specialty.Find(testSpecialty.GetId());
+
+      Assert.AreEqual(testSpecialty, foundSpecialty);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Specialty()
+    {
+      Specialty firstSpecialty = new Specialty("Makeup");
+      Specialty secondSpecialty = new Specialty("Makeup");
+      Assert.AreEqual(firstSpecialty, secondSpecialty);
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_SpecialtyList()
+    {
+      //Arrange
+      Specialty testSpecialty = new Specialty("Makeup");
+
+      //Act
+      testSpecialty.Save();
+      List<Specialty> result = Specialty.GetAll();
+      List<Specialty> testList = new List<Specialty>{testSpecialty};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
     }
 
   }
