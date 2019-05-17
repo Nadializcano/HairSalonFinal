@@ -60,7 +60,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetAll_ReturnsSpecialtys_SpecialtyList()
+    public void GetAll_ReturnsSpecialties_SpecialtyList()
     {
       string description01 = "makeuo";
       string description02 = "haircut";
@@ -107,6 +107,18 @@ namespace HairSalon.Tests
 
       //Assert
       CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      Specialty testSpecialty = new Specialty("Makeup");
+
+      testSpecialty.Save();
+      Specialty savedSpecialty = Specialty.GetAll()[0];
+      int result = savedSpecialty.GetId();
+      int testId = testSpecialty.GetId();
+      Assert.AreEqual(testId, result);
     }
 
   }

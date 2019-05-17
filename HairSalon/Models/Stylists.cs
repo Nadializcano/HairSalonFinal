@@ -203,13 +203,6 @@ namespace HairSalon.Models
          stylistId.ParameterName = "@stylistId";
          stylistId.Value = _id;
          cmd.Parameters.Add(stylistId);
-         // var cmd2 = conn.CreateCommand() as MySqlCommand;
-         // cmd2.CommandText = @"DELETE FROM items WHERE id = @stylist_Id";
-         // MySqlParameter stylist_IdParameter = new MySqlParameter();
-         // stylist_IdParameter.ParameterName = "@stylist_Id";
-         // stylist_IdParameter.Value = this.GetId();
-         // cmd.Parameters.Add(stylist_IdParameter);
-         // cmd2.ExecuteNonQuery();
          cmd.ExecuteNonQuery();
          conn.Close();
          if (conn != null)
