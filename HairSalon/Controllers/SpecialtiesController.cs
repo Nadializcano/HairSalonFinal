@@ -59,6 +59,26 @@ public ActionResult AddCategory(int specialtyId, int stylistId)
   return RedirectToAction("Show",  new { id = specialtyId });
 }
 
+[HttpGet("/specialties/{specialtyId}/edit")]
+      public ActionResult Edit(int specialtyId)
+      {
+
+
+        Specialty specialty = Specialty.Find(specialtyId);
+        return View(specialty);
+      }
+    [HttpPost("/specialties/{specialtyId}/update")]
+      public ActionResult Update(int specialtyId, string newDescription)
+      {
+        Specialty specialty = Specialty.Find(specialtyId);
+        specialty.Edit(newDescription);
+        List<Specialty> allSpecialties = Specialty.GetAll();
+        return View("Index", allSpecialties);
+      }
+
+
+
+
 
 
 
