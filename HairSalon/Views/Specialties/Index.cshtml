@@ -10,10 +10,11 @@
     @foreach (var specialty in Model)
     {
       <li><a href='/specialties/@specialty.GetId()'>@specialty.GetDescription()</a></li>
+      <button class="btn btn-sm" ><a href='/specialties/@specialty.GetId()/edit'>Edit</a></button>
     }
   </ul>
 
-  
+
 }
 
 <h4><a href="/specialties/new">Add new specialty</a></h4>

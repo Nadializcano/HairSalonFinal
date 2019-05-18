@@ -21,9 +21,9 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/specialties")]
-    public ActionResult Create(string description)
+    public ActionResult Create(string specialtyDescription)
     {
-      Specialty newSpecialty = new Specialty(description);
+      Specialty newSpecialty = new Specialty(specialtyDescription);
       newSpecialty.Save();
       List<Specialty> allSpecialties = Specialty.GetAll();
       return View("Index", allSpecialties);
@@ -50,23 +50,22 @@ namespace HairSalon.Controllers
     return RedirectToAction("Index");
   }
 
-[HttpPost("/specialties/{specialtyId}/stylists/new")]
-public ActionResult AddCategory(int specialtyId, int stylistId)
-{
-  Specialty specialty = Specialty.Find(specialtyId);
-  Stylist stylist = Stylist.Find(stylistId);
-  specialty.AddStylist(stylist);
-  return RedirectToAction("Show",  new { id = specialtyId });
-}
+// [HttpPost("/specialties/{specialtyId}/stylists/new")]
+// public ActionResult AddCategory(int specialtyId, int stylistId)
+// {
+//   Specialty specialty = Specialty.Find(specialtyId);
+//   Stylist stylist = Stylist.Find(stylistId);
+//   specialty.AddStylist(stylist);
+//   return RedirectToAction("Show",  new { id = specialtyId });
+// }
 
 [HttpGet("/specialties/{specialtyId}/edit")]
       public ActionResult Edit(int specialtyId)
       {
-
-
         Specialty specialty = Specialty.Find(specialtyId);
         return View(specialty);
       }
+      
     [HttpPost("/specialties/{specialtyId}/update")]
       public ActionResult Update(int specialtyId, string newDescription)
       {
