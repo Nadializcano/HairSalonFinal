@@ -37,7 +37,7 @@ namespace HairSalon.Models
 
       public static List<Specialty> GetAll()
       {
-        List<Specialty> allSpecialtys = new List<Specialty> {};
+        List<Specialty> allSpecialties = new List<Specialty> {};
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
@@ -48,14 +48,14 @@ namespace HairSalon.Models
           int specialtyId = rdr.GetInt32(0);
           string specialtyDescription = rdr.GetString(1);
           Specialty newSpecialty = new Specialty(specialtyDescription,specialtyId);
-          allSpecialtys.Add(newSpecialty);
+          allSpecialties.Add(newSpecialty);
         }
         conn.Close();
         if (conn != null)
         {
             conn.Dispose();
         }
-        return allSpecialtys;
+        return allSpecialties;
       }
 
       public static void ClearAll()
@@ -185,10 +185,10 @@ namespace HairSalon.Models
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO specialties_stylist (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId);";
-      MySqlParameter stylyst_id = new MySqlParameter();
-      stylyst_id.ParameterName = "@StylistId";
-      stylyst_id.Value = newStylist.GetId();
-      cmd.Parameters.Add(stylyst_id);
+      MySqlParameter stylist_id = new MySqlParameter();
+      stylist_id.ParameterName = "@StylistId";
+      stylist_id.Value = newStylist.GetId();
+      cmd.Parameters.Add(stylist_id);
       MySqlParameter specialty_id = new MySqlParameter();
       specialty_id.ParameterName = "@SpecialtyId";
       specialty_id.Value = _id;
