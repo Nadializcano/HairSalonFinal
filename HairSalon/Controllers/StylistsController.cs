@@ -39,12 +39,10 @@ namespace HairSalon.Controllers
       newClient.Save();
       //foundStylist.AddClient(newClient);
       List<Client> stylistClients = foundStylist.GetClients();
-      model.Add("clients", stylistClients);
+      model.Add("stylistClients", stylistClients);
       model.Add("stylist", foundStylist);
       return View("Show", model);
     }
-
-
 
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
@@ -53,14 +51,13 @@ namespace HairSalon.Controllers
       Stylist selectedStylist = Stylist.Find(id);
       List<Client> stylistClients = selectedStylist.GetClients();
       List<Specialty> stylistSpecialties = selectedStylist.GetSpecialties();
-      List<Specialty> allSpecialties = Specialty.GetAll();
       List<Client> allClients = Client.GetAll();
+      List<Specialty> allSpecialties = Specialty.GetAll();
+      model.Add("stylist", selectedStylist);
+      model.Add("stylistClients", stylistClients);
+      model.Add("stylistSpecialties", stylistSpecialties);
       model.Add("allClients", allClients);
       model.Add("allSpecialties", allSpecialties);
-      model.Add("stylistSpecialties", stylistSpecialties);
-      model.Add("clients", stylistClients);
-      model.Add("stylist", selectedStylist);
-
       return View(model);
     }
 

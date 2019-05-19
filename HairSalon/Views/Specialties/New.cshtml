@@ -1,19 +1,28 @@
+
 <html>
   <head>
-    <meta charset='utf-8'>
-    <title>NL Hair Salon</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
   </head>
-  <body>
+    <body>
+
+    <div class="container">
+  	<div class="row">
     <h1>Add a new specialty</h1>
 
-<form action="/specialties" method="post">
-  <label for="description">Specialty description:</label>
-  <input id="description" name="description" type="text">
-  <button type="submit">Add new specialty</button>
-</form>
+    <form action="/specialties" method="post">
+      <label for="description">Specialty description:</label>
+      <input id="description" name="description" type="text">
+      <button type="submit">Add new specialty</button>
+    </form>
 
-<p><a href="/">Back home</a></p>
-<p><a href="/specialties">View all specialties</a></p>
-  </body>
+    <p><a href="/">Back home</a></p>
+    <p><a href="/specialties">View all specialties</a></p>
 
+    </div>
+    </div>
+
+    </body>
 </html>

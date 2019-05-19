@@ -1,46 +1,57 @@
 @using HairSalon.Models;
+<html>
+  <head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
+  </head>
+    <body>
 
-<h1>NL Hair Salon</h1>
-<h2>Specialty: @Model["selectedSpecialty"].GetDescription()</h2>
-<hr />
+    <div class="container">
+  	<div class="row">
 
-@if (@Model["specialtyStylists"].Count != 0)
-{
-  <h4>This specialty has these stylists:</h4>
-  <ul>
-    @foreach (Stylist stylist in @Model["specialtyStylists"])
+    <h1>NL Hair Salon</h1>
+    <h2>Specialty: @Model["selectedSpecialty"].GetDescription()</h2>
+    <hr />
+
+    @if (@Model["specialtyStylists"].Count != 0)
     {
-      <li>@stylist.GetName()</li>
+      <h4>This specialty has these stylists:</h4>
+      <ul>
+        @foreach (Stylist stylist in @Model["specialtyStylists"])
+        {
+          <li>@stylist.GetName()</li>
+        }
+      </ul>
     }
-  </ul>
-}
 
-<h4>Add a stylist to this specialty:</h4>
+    <h4>Add a stylist to this specialty:</h4>
 
-<form action='/specialties/@Model["selectedSpecialty"].GetId()/stylists/new' method='post'>
-  <label for='stylistId'>Select a stylist</label>
-  <select id='stylistId' name='stylistId' type='text'>
-    @foreach (var stylist in @Model["allStylists"])
-    {
-      <option value='@stylist.GetId()'>@stylist.GetName()</option>
-    }
-  </select>
-  <button type='submit'>Add</button>
-</form>
+    <form action='/specialties/@Model["selectedSpecialty"].GetId()/stylists/new' method='post'>
+      <label for='stylistId'>Select a stylist</label>
+      <select id='stylistId' name='stylistId' type='text'>
+        @foreach (var stylist in @Model["allStylists"])
+        {
+          <option value='@stylist.GetId()'>@stylist.GetName()</option>
+        }
+      </select>
+      <button type='submit'>Add</button>
+    </form>
 
 
-  
+    <h4>Delete this Specialty:</h4>
+
+    <form action="/specialties/@Model["selectedSpecialty"].GetId()/delete" method="post">
+      <button type="submit" name="button">delete Specialty</button>
+    </form>
 
 
+    <p><a href="/specialties">Return to Specialties</a></p>
+    <p><a href="/">Return to Main Page</a></p>
 
+    </div>
+    </div>
 
-
-<h4>Delete this Specialty:</h4>
-
-<form action="/specialties/@Model["selectedSpecialty"].GetId()/delete" method="post">
-  <button type="submit" name="button">delete Specialty</button>
-</form>
-
-
-<p><a href="/specialties">Return to Specialties</a></p>
-<p><a href="/">Return to Main Page</a></p>
+    </body>
+  </html>
