@@ -211,61 +211,111 @@ namespace HairSalon.Models
          }
        }
 
-       public void AddSpecialty(Specialty newSpecialty)
+       public List<Specialty> GetSpecialties()
         {
           MySqlConnection conn = DB.Connection();
-          conn.Open();
-          var cmd = conn.CreateCommand() as MySqlCommand;
-          cmd.CommandText = @"INSERT INTO specialties_stylist (specialty_id, stylist_id) VALUES (@StylistId, @SpecialtyId);";
-          MySqlParameter stylist_id = new MySqlParameter();
-          stylist_id.ParameterName = "@StylistId";
-          stylist_id.Value = _id;
-          cmd.Parameters.Add(stylist_id);
+         conn.Open();
+          MySqlCommand cmd = conn.CreateCommand();
+          cmd.CommandText = @"SELECT specialties.* FROM stylist
+          JOIN specialties_stylist ON (stylist.id = specialties_stylist.stylist_id)
+          JOIN specialties ON (specialties_stylist.specialty_id = specialties.id)
+         WHERE stylist.id = @StylistId;";
 
-          MySqlParameter specialty_id = new MySqlParameter();
-          specialty_id.ParameterName = "@SpecialtyId";
-          specialty_id.Value = newSpecialty.GetId();
-          cmd.Parameters.Add(specialty_id);
-          cmd.ExecuteNonQuery();
-          conn.Close();
-          if (conn != null)
-          {
-            conn.Dispose();
-          }
+         MySqlParameter stylistIdParameter = new MySqlParameter();
+            stylistIdParameter.ParameterName = "@StylistId";
+            stylistIdParameter.Value = _id;
+            cmd.Parameters.Add(stylistIdParameter);
+
+           MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            List<Specialty> specialties = new List<Specialty> {};
+          while(rdr.Read())
+            {
+              int specialtyId = rdr.GetInt32(0);
+                string specialtyName = rdr.GetString(1);
+
+                Specialty newSpecialty = new Specialty(specialtyName, specialtyId);
+                specialties.Add(newSpecialty);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return specialties;
         }
 
-        public List<Specialty> GetSpecialties()
+
+        public void AddSpecialty(Specialty newSpecialty)
+       {
+         MySqlConnection conn = DB.Connection();
+         conn.Open();
+         var cmd = conn.CreateCommand() as MySqlCommand;
+         cmd.CommandText = @"INSERT INTO specialties_stylist (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId);";
+         MySqlParameter stylist_id = new MySqlParameter();
+         stylist_id.ParameterName = "@StylistId";
+         stylist_id.Value = _id;
+         cmd.Parameters.Add(stylist_id);
+         MySqlParameter specialty_id = new MySqlParameter();
+         specialty_id.ParameterName = "@SpecialtyId";
+         specialty_id.Value = newSpecialty.GetId();
+         cmd.Parameters.Add(specialty_id);
+         cmd.ExecuteNonQuery();
+         conn.Close();
+         if (conn != null)
          {
-           MySqlConnection conn = DB.Connection();
-          conn.Open();
-           MySqlCommand cmd = conn.CreateCommand();
-           cmd.CommandText = @"SELECT specialties.* FROM stylist
-           JOIN specialties_stylist ON (stylist.id = specialties_stylist.stylist_id)
-           JOIN specialties ON (specialties_stylist.specialty_id = specialties.id)
-          WHERE stylist.id = @StylistId;";
-
-          MySqlParameter stylistIdParameter = new MySqlParameter();
-             stylistIdParameter.ParameterName = "@StylistId";
-             stylistIdParameter.Value = _id;
-             cmd.Parameters.Add(stylistIdParameter);
-
-            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-             List<Specialty> specialties = new List<Specialty> {};
-           while(rdr.Read())
-             {
-               int specialtyId = rdr.GetInt32(0);
-                 string specialtyName = rdr.GetString(1);
-
-                 Specialty newSpecialty = new Specialty(specialtyName, specialtyId);
-                 specialties.Add(newSpecialty);
-             }
-             conn.Close();
-             if (conn != null)
-             {
-                 conn.Dispose();
-             }
-             return specialties;
+           conn.Dispose();
          }
+       }
+
+
+       // public List<Specialty> GetSpecialties()
+       //  {
+       //    MySqlConnection conn = DB.Connection();
+       //   conn.Open();
+       //    var cmd = conn.CreateCommand() as MySqlCommand;
+       //    cmd.CommandText = @"SELECT specialty_id FROM specialties_stylist WHERE stylist_id = @StylistId;";
+       //   MySqlParameter stylistIdParameter = new MySqlParameter();
+       //      stylistIdParameter.ParameterName = "@StylistId";
+       //      stylistIdParameter.Value = _id;
+       //      cmd.Parameters.Add(stylistIdParameter);
+       //
+       //     var rdr = cmd.ExecuteReader() as MySqlDataReader;
+       //      List<int> specialtyIds = new List<int> {};
+       //    while(rdr.Read())
+       //      {
+       //        int specialtyId = rdr.GetInt32(0);
+       //        specialtyIds.Add(specialtyId);
+       //      }
+       //      rdr.Dispose();
+       //      List<Specialty> specialties = new List<Specialty> {};
+       //      foreach (int specialtyId in specialtyIds)
+       //      {
+       //
+       //      var specialtyQuery = conn.CreateCommand() as MySqlCommand;
+       //      specialtyQuery.CommandText = @"SELECT * FROM specialties WHERE id = @SpecialtyId;";
+       //      MySqlParameter specialtyIdParameter = new MySqlParameter();
+       //      specialtyIdParameter.ParameterName = "@SpecialtyId";
+       //      specialtyIdParameter.Value = specialtyId;
+       //      specialtyQuery.Parameters.Add(specialtyIdParameter);
+       //      var specialtyQueryRdr = specialtyQuery.ExecuteReader() as MySqlDataReader;
+       //      while(specialtyQueryRdr.Read())
+       //      {
+       //        int thisSpecialtyId = specialtyQueryRdr.GetInt32(0);
+       //        string specialtyDescription = specialtyQueryRdr.GetString(1);
+       //        Specialty foundSpecialty = new Specialty(specialtyDescription, thisSpecialtyId);
+       //        specialties.Add(foundSpecialty);
+       //      }
+       //      specialtyQueryRdr.Dispose();
+       //      {
+       //      conn.Close();
+       //      if (conn != null)
+       //      {
+       //          conn.Dispose();
+       //      }
+       //      return specialties;
+       //    }
+       //  }
+       // }
 
 
 
