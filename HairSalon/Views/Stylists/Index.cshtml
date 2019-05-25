@@ -24,7 +24,7 @@
         {
           <li><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></li>
 
-          <button class="btn btn-sm" ><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
+          <button><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
 
         }
 
@@ -33,7 +33,7 @@
       </ul>
 
       <form action="/stylists/delete" method="post">
-      <button class="btn btn-sm" type="submit" name="button">Delete all stylists</button>
+      <button type="submit" name="button">Delete all stylists</button>
       </form>
       <p><a href="/stylists/new">Add a new stylist.</a></p>
       <p><a href='/'>Back home</a></p>
